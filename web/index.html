@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Buzzer</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <section class="hero card">
+        <div>
+          <p class="eyebrow">Local realtime game</p>
+          <h1>Buzz first. Lock the round. Reset from admin.</h1>
+          <p class="lede">
+            A phone-friendly buzzer built on local Supabase only. Multiple screens stay in sync, the
+            first valid update wins, and the winner gets an audible alert.
+          </p>
+        </div>
+        <div class="status-stack">
+          <div class="status-pill status-pill-open" id="connection-status">Connecting...</div>
+          <div class="status-pill status-pill-muted" id="profile-status">Not signed in</div>
+        </div>
+      </section>
+
+      <section class="grid">
+        <section class="card card-soft">
+          <div class="card-heading">
+            <div>
+              <p class="eyebrow">Profiles</p>
+              <h2>Pick a player</h2>
+            </div>
+            <button id="clear-profile-btn" class="ghost-btn" type="button">Clear</button>
+          </div>
+
+          <div id="saved-profiles" class="saved-profiles" aria-live="polite"></div>
+
+          <form id="login-form" class="stack">
+            <label>
+              Profile
+              <select id="profile-id" required></select>
+            </label>
+            <label>
+              Password
+              <input id="profile-password" type="password" autocomplete="current-password" required />
+            </label>
+            <label class="checkbox-row">
+              <input id="remember-profile" type="checkbox" checked />
+              <span>Remember this profile on this device</span>
+            </label>
+            <button type="submit">Sign In</button>
+          </form>
+          <p id="login-status" class="muted"></p>
+        </section>
+
+        <section class="card buzz-card">
+          <div class="card-heading">
+            <div>
+              <p class="eyebrow">Round</p>
+              <h2>Game state</h2>
+            </div>
+            <span id="round-badge" class="status-pill status-pill-open">Open</span>
+          </div>
+
+          <div class="game-panel">
+            <p id="game-status">Loading game state...</p>
+            <p id="winner-status" class="winner-text"></p>
+          </div>
+
+          <button id="buzz-btn" class="buzz-btn" disabled>BUZZ</button>
+          <p class="hint">
+            Tap once only. The server-side update decides the winner, not the UI.
+          </p>
+        </section>
+      </section>
+    </main>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

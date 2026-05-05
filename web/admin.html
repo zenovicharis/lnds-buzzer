@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Buzzer Admin</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="page admin-page">
+      <section class="hero card hero-admin">
+        <div>
+          <p class="eyebrow">Admin console</p>
+          <h1>Reset the round instantly.</h1>
+          <p class="lede">
+            This page is intentionally minimal: enter the admin password, reset the game, and watch
+            every connected screen unlock in realtime.
+          </p>
+        </div>
+        <div class="status-stack">
+          <div class="status-pill status-pill-closed" id="admin-connection-status">Live dashboard</div>
+          <div class="status-pill status-pill-muted">Local only</div>
+        </div>
+      </section>
+
+      <section class="grid admin-grid">
+        <section class="card card-soft">
+          <div class="card-heading">
+            <div>
+              <p class="eyebrow">Controls</p>
+              <h2>Reset game state</h2>
+            </div>
+          </div>
+
+          <form id="reset-form" class="stack">
+            <label>
+              Admin Password
+              <input id="admin-password" type="password" autocomplete="current-password" required />
+            </label>
+            <button type="submit">Reset Round</button>
+          </form>
+          <p id="admin-status" class="muted"></p>
+        </section>
+
+        <section class="card">
+          <div class="card-heading">
+            <div>
+              <p class="eyebrow">State</p>
+              <h2>Current round</h2>
+            </div>
+          </div>
+          <pre id="state-view">Loading...</pre>
+        </section>
+
+        <section class="card admin-rounds-card">
+          <div class="card-heading">
+            <div>
+              <p class="eyebrow">History</p>
+              <h2>Round timeline</h2>
+            </div>
+          </div>
+          <div id="rounds-list" class="rounds-list" aria-live="polite"></div>
+        </section>
+      </section>
+    </main>
+
+    <script type="module" src="./admin.js"></script>
+  </body>
+</html>
