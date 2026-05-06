@@ -50,19 +50,12 @@ From the server:
 
 ```bash
 cd buzzer-app/supabase
+docker network inspect npm_default >/dev/null 2>&1 || docker network create npm_default
 docker compose up -d
 docker compose ps
 ```
 
-Apply migrations:
-
-```bash
-docker exec -i supabase_db psql -U postgres -d postgres < migrations/001_buzzer_schema.sql
-docker exec -i supabase_db psql -U postgres -d postgres < migrations/002_buzzer_realtime_rls.sql
-docker exec -i supabase_db env PGPASSWORD=postgres psql -U supabase_admin -d postgres < migrations/003_realtime_localhost_tenant.sql
-docker exec -i supabase_db psql -U postgres -d postgres < migrations/004_round_history.sql
-docker exec -i supabase_db psql -U postgres -d postgres < migrations/005_round_history_rls.sql
-```
+The compose file attaches all services to the external `npm_default` network and runs SQL migrations automatically through the `migrate` service before REST, Realtime, and Studio start.
 
 ## 4. Reverse Proxy
 
@@ -140,4 +133,3 @@ docker exec supabase_db pg_dump -U postgres -d postgres > buzzer-backup.sql
 ```
 
 Store backups somewhere outside the server.
-
