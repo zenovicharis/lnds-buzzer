@@ -4,17 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Buzzer</title>
-    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./style/styles.css" />
   </head>
   <body>
     <main class="page">
-      <section class="hero card">
+      <section class="hero">
         <div>
           <p class="eyebrow">Local realtime game</p>
-          <h1>Buzz first. Lock the round. Reset from admin.</h1>
+          <h1>Jeopardy buzzer</h1>
           <p class="lede">
-            A phone-friendly buzzer built on local Supabase only. Multiple screens stay in sync, the
-            first valid update wins, and the winner gets an audible alert.
+            Sign in once on this device, then keep your phone on the buzzer and watch your score
+            move live as answers are confirmed.
           </p>
         </div>
         <div class="status-stack">
@@ -24,7 +24,7 @@
       </section>
 
       <section class="grid">
-        <section class="card card-soft">
+        <section class="card card-soft" id="login-card">
           <div class="card-heading">
             <div>
               <p class="eyebrow">Profiles</p>
@@ -53,28 +53,37 @@
           <p id="login-status" class="muted"></p>
         </section>
 
-        <section class="card buzz-card">
+        <section class="card player-card is-hidden" id="player-card">
           <div class="card-heading">
             <div>
-              <p class="eyebrow">Round</p>
-              <h2>Game state</h2>
+              <p class="eyebrow">Player</p>
+              <h2 id="player-name">Buzzer</h2>
             </div>
-            <span id="round-badge" class="status-pill status-pill-open">Open</span>
+            <button id="sign-out-btn" class="ghost-btn" type="button">Sign Out</button>
+          </div>
+
+          <div class="score-strip">
+            <div>
+              <span class="score-label">Score</span>
+              <strong id="player-score">0</strong>
+            </div>
+            <span id="round-badge" class="status-pill status-pill-open">Waiting</span>
           </div>
 
           <div class="game-panel">
             <p id="game-status">Loading game state...</p>
             <p id="winner-status" class="winner-text"></p>
+            <p id="timer-status" class="timer-text"></p>
           </div>
 
           <button id="buzz-btn" class="buzz-btn" disabled>BUZZ</button>
-          <p class="hint">
-            Tap once only. The server-side update decides the winner, not the UI.
-          </p>
+          <p class="hint">The server accepts the first valid buzz for the active question.</p>
+
+          <div id="scoreboard" class="scoreboard" aria-live="polite"></div>
         </section>
       </section>
     </main>
 
-    <script type="module" src="./app.js"></script>
+    <script type="module" src="./script/app.js"></script>
   </body>
 </html>

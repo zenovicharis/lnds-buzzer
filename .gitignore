@@ -1,0 +1,45 @@
+# Dependencies
+node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Local Supabase and database data
+buzzer-app/supabase/.branches/
+buzzer-app/supabase/.temp/
+buzzer-app/supabase/.env
+buzzer-app/supabase/.env.*
+buzzer-app/supabase/volumes/
+buzzer-app/supabase/data/
+*.dump
+*.sql.gz
+*-backup.sql
+
+# Surge
+.surgeignore
+
+# Build output
+dist/
+build/
+.cache/
+.parcel-cache/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+

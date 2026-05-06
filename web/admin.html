@@ -4,17 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Buzzer Admin</title>
-    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./style/styles.css" />
   </head>
   <body>
     <main class="page admin-page">
-      <section class="hero card hero-admin">
+      <section class="hero hero-admin">
         <div>
           <p class="eyebrow">Admin console</p>
-          <h1>Reset the round instantly.</h1>
+          <h1>Run the board.</h1>
           <p class="lede">
-            This page is intentionally minimal: enter the admin password, reset the game, and watch
-            every connected screen unlock in realtime.
+            Select a game type and value, confirm correct answers, or release the buzzer when the
+            answer window expires.
           </p>
         </div>
         <div class="status-stack">
@@ -28,18 +28,67 @@
           <div class="card-heading">
             <div>
               <p class="eyebrow">Controls</p>
-              <h2>Reset game state</h2>
+              <h2>Question setup</h2>
             </div>
           </div>
 
-          <form id="reset-form" class="stack">
+          <form id="question-form" class="stack">
             <label>
               Admin Password
               <input id="admin-password" type="password" autocomplete="current-password" required />
             </label>
-            <button type="submit">Reset Round</button>
+            <label>
+              Game Type
+              <select id="game-type">
+                <option value="jeopardy">Jeopardy</option>
+                <option value="double">Double Jeopardy</option>
+              </select>
+            </label>
+            <div>
+              <p class="field-label">Value</p>
+              <div class="segmented" role="radiogroup" aria-label="Question value">
+                <label><input type="radio" name="point-value" value="100" checked /><span>100</span></label>
+                <label><input type="radio" name="point-value" value="200" /><span>200</span></label>
+                <label><input type="radio" name="point-value" value="500" /><span>500</span></label>
+                <label><input type="radio" name="point-value" value="1000" /><span>1000</span></label>
+              </div>
+            </div>
+            <button type="submit">Start Question</button>
+          </form>
+
+          <div class="admin-actions">
+            <button id="correct-btn" type="button">Confirm Correct</button>
+            <button id="release-btn" class="ghost-btn" type="button">Release Buzzer</button>
+          </div>
+
+          <form id="reset-form" class="stack reset-stack">
+            <button type="submit" class="ghost-btn">Reset Round</button>
           </form>
           <p id="admin-status" class="muted"></p>
+        </section>
+
+        <section class="card">
+          <div class="card-heading">
+            <div>
+              <p class="eyebrow">Scores</p>
+              <h2>Leaderboard</h2>
+            </div>
+          </div>
+          <div id="scoreboard" class="scoreboard" aria-live="polite"></div>
+        </section>
+
+        <section class="card">
+          <div class="card-heading">
+            <div>
+              <p class="eyebrow">Answer</p>
+              <h2>Window</h2>
+            </div>
+            <span id="round-badge" class="status-pill status-pill-muted">Waiting</span>
+          </div>
+          <div class="game-panel">
+            <p id="active-question">No active question yet.</p>
+            <p id="answer-timer" class="timer-text"></p>
+          </div>
         </section>
 
         <section class="card">
@@ -64,6 +113,6 @@
       </section>
     </main>
 
-    <script type="module" src="./admin.js"></script>
+    <script type="module" src="./script/admin.js"></script>
   </body>
 </html>

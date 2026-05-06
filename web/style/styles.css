@@ -2,8 +2,6 @@
   color-scheme: light;
   font-family: "Avenir Next", "Segoe UI", sans-serif;
   background:
-    radial-gradient(circle at top left, rgba(214, 56, 91, 0.18), transparent 30%),
-    radial-gradient(circle at top right, rgba(22, 57, 95, 0.14), transparent 28%),
     linear-gradient(180deg, #f5f7fb 0%, #eef3f8 100%);
   color: #0f2138;
   --panel: rgba(255, 255, 255, 0.9);
@@ -37,13 +35,13 @@ h1 {
   margin: 0;
   font-size: clamp(2rem, 5vw, 4rem);
   line-height: 0.98;
-  letter-spacing: -0.04em;
+  letter-spacing: 0;
 }
 
 h2 {
   margin: 0;
   font-size: 1.25rem;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 .hero {
@@ -60,7 +58,7 @@ h2 {
 .card {
   background: var(--panel);
   border: 1px solid var(--panel-border);
-  border-radius: 22px;
+  border-radius: 8px;
   padding: 18px;
   box-shadow: var(--shadow);
   backdrop-filter: blur(14px);
@@ -83,12 +81,12 @@ h2 {
   gap: 16px;
 }
 
-.buzz-card {
+.player-card {
   position: relative;
   overflow: hidden;
 }
 
-.buzz-card::before {
+.player-card::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -125,7 +123,7 @@ h2 {
   gap: 8px;
   min-height: 36px;
   padding: 8px 12px;
-  border-radius: 999px;
+  border-radius: 8px;
   font-size: 0.84rem;
   font-weight: 700;
   letter-spacing: 0.01em;
@@ -177,7 +175,7 @@ select,
 button {
   font: inherit;
   padding: 12px 14px;
-  border-radius: 14px;
+  border-radius: 8px;
   border: 1px solid rgba(15, 33, 56, 0.16);
   background: rgba(255, 255, 255, 0.95);
   color: var(--ink);
@@ -248,7 +246,7 @@ button:disabled {
   display: grid;
   gap: 8px;
   padding: 14px 16px;
-  border-radius: 18px;
+  border-radius: 8px;
   background: rgba(15, 33, 56, 0.04);
   border: 1px solid rgba(15, 33, 56, 0.08);
 }
@@ -314,10 +312,117 @@ button:disabled {
 pre {
   background: rgba(247, 251, 255, 0.92);
   border: 1px solid rgba(15, 33, 56, 0.08);
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 14px;
   overflow-x: auto;
   margin: 0;
+}
+
+.is-hidden {
+  display: none;
+}
+
+.score-strip {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  margin-bottom: 14px;
+  border-radius: 8px;
+  background: rgba(15, 33, 56, 0.05);
+  border: 1px solid rgba(15, 33, 56, 0.08);
+}
+
+.score-label,
+.field-label {
+  display: block;
+  margin: 0 0 5px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.score-strip strong {
+  font-size: 2.1rem;
+  line-height: 1;
+}
+
+.timer-text {
+  min-height: 1.4em;
+  margin: 0;
+  color: var(--accent-deep);
+  font-weight: 800;
+}
+
+.scoreboard {
+  display: grid;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.score-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: rgba(15, 33, 56, 0.04);
+  border: 1px solid rgba(15, 33, 56, 0.08);
+  font-weight: 700;
+}
+
+.score-row.is-current {
+  background: rgba(27, 122, 72, 0.1);
+  border-color: rgba(27, 122, 72, 0.2);
+}
+
+.segmented {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.segmented label {
+  display: block;
+}
+
+.segmented input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.segmented span {
+  display: grid;
+  min-height: 44px;
+  place-items: center;
+  padding: 10px;
+  border-radius: 8px;
+  background: rgba(15, 33, 56, 0.05);
+  border: 1px solid rgba(15, 33, 56, 0.12);
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.segmented input:checked + span {
+  background: #16395f;
+  border-color: #16395f;
+  color: #fff;
+}
+
+.admin-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.reset-stack {
+  margin-top: 10px;
 }
 
 .admin-page {

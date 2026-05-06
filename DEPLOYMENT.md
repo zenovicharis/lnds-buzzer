@@ -70,28 +70,30 @@ If exposing Studio, put it behind HTTPS and authentication.
 
 ## 5. Frontend Config To Adjust
 
-Edit both files:
+Edit one file:
 
-- `web/app.js`
-- `web/admin.js`
+- `web/script/config.js`
 
 Set:
 
 ```js
-const SUPABASE_URL = "https://api.YOUR-DOMAIN.com";
+supabaseUrl: "https://api.YOUR-DOMAIN.com",
 ```
 
 Set the Realtime URL to:
 
 ```js
-const realtimeUrl = `wss://realtime.YOUR-DOMAIN.com/socket/websocket?apikey=${encodeURIComponent(SUPABASE_ANON_KEY)}&vsn=1.0.0`;
+realtimeUrl: "wss://realtime.YOUR-DOMAIN.com/socket/websocket",
 ```
+
+The app appends the `apikey` and `vsn` query parameters automatically.
 
 Key values to review before production:
 
-- `SUPABASE_URL`
+- `supabaseUrl`
+- `realtimeUrl`
 - Realtime host
-- `SUPABASE_ANON_KEY`
+- `supabaseAnonKey`
 - Profile passwords
 - Admin password
 - JWT secret in the Supabase Docker environment
