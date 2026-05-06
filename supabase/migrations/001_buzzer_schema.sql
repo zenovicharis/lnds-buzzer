@@ -46,7 +46,9 @@ as $$
   );
 $$;
 
-create or replace function public.reset_game(
+drop function if exists public.reset_game(text);
+
+create function public.reset_game(
   p_admin_password text
 )
 returns public.game_state
