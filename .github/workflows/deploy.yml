@@ -21,5 +21,38 @@ jobs:
       - name: Install Surge
         run: npm install -g surge
 
+      - name: Configure production frontend
+        run: |
+          cat > ./web/script/config.js <<'EOF'
+          const DEFAULT_CONFIG = {
+            supabaseUrl: "${{ secrets.SUPABASE_URL }}",
+            realtimeUrl: "${{ secrets.SUPABASE_REALTIME_URL }}",
+            supabaseAnonKey:
+              "${{
+                secrets.SUPABASE_ANON_KEY
+              }}",
+          };
+
+          const runtimeConfig = globalThis.BUZZER_CONFIG || {};
+
+          export const APP_CONFIG = {
+            ...DEFAULT_CONFIG,
+            ...runtimeConfig,
+          };
+
+          export function getRealtimeUrl() {
+            const url = new URL(APP_CONFIG.realtimeUrl);
+            url.searchParams.set("apikey", APP_CONFIG.supabaseAnonKey);
+            url.searchParams.set("vsn", "1.0.0");
+            return url.toString();
+          }
+          EOF
+
+      - name: Validate frontend scripts
+        run: |
+          node --check ./web/script/config.js
+          node --check ./web/script/app.js
+          node --check ./web/script/admin.js
+
       - name: Deploy to Surge
         run: surge ./web --project lnds-buzzer.surge.sh --token ${{ secrets.SURGE_TOKEN }}

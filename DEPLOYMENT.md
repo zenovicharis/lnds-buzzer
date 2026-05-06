@@ -70,17 +70,17 @@ If exposing Studio, put it behind HTTPS and authentication.
 
 ## 5. Frontend Config To Adjust
 
-Edit one file:
+For local development, keep the checked-in defaults in:
 
 - `web/script/config.js`
 
-Set:
+They derive the API host from the page hostname, so `localhost` and laptop-LAN testing both keep working.
+
+For production, GitHub Actions replaces `web/script/config.js` during the deploy job with:
 
 ```js
-supabaseUrl: "https://api.YOUR-DOMAIN.com",
+supabaseUrl: "https://supabase.YOUR-DOMAIN.com",
 ```
-
-Set the Realtime URL to:
 
 ```js
 realtimeUrl: "wss://realtime.YOUR-DOMAIN.com/socket/websocket",

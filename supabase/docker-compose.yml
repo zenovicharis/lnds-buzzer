@@ -50,6 +50,7 @@ services:
         psql -h supabase_db -U supabase_admin -d postgres -v ON_ERROR_STOP=1 -f /migrations/003_realtime_localhost_tenant.sql
         psql -h supabase_db -U postgres -d postgres -v ON_ERROR_STOP=1 -f /migrations/004_round_history.sql
         psql -h supabase_db -U postgres -d postgres -v ON_ERROR_STOP=1 -f /migrations/005_round_history_rls.sql
+        psql -h supabase_db -U postgres -d postgres -v ON_ERROR_STOP=1 -f /migrations/006_jeopardy_game.sql
 
   rest:
     image: postgrest/postgrest:v14.8
