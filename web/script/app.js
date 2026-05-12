@@ -19,6 +19,10 @@ const PROFILES = [
   { id: "p6", label: "Emi" },
 ];
 
+const PLAYER_WIN_SOUNDS = {
+  p5: "./audio/rania-wins.wav",
+};
+
 const loginCard = document.getElementById("login-card");
 const playerCard = document.getElementById("player-card");
 const loginForm = document.getElementById("login-form");
@@ -233,6 +237,23 @@ function playWinnerTone() {
 	osc.stop(now + 0.4);
 }
 
+async function playWinnerSound(profileId) {
+  const soundSrc = PLAYER_WIN_SOUNDS[profileId];
+
+  if (!soundSrc) {
+    playWinnerTone();
+    return;
+  }
+
+  try {
+    const audio = new Audio(soundSrc);
+    audio.volume = 0.9;
+    await audio.play();
+  } catch {
+    playWinnerTone();
+  }
+}
+
 function renderSession() {
   const signedIn = Boolean(currentProfileId && currentPassword);
   loginCard.classList.toggle("is-hidden", signedIn);
@@ -343,12 +364,12 @@ function renderState(state, rounds, scores = currentScores) {
     winnerStatus.textContent = `For ${currentRound.point_value} points`;
 
     if (
-      currentRound.winner_profile_id === currentProfileId &&
+      currentRound.winner_profile_id &&
       currentRound.buzzed_at &&
       latestBuzzStampPlayed !== currentRound.buzzed_at
     ) {
       latestBuzzStampPlayed = currentRound.buzzed_at;
-      playWinnerTone();
+      playWinnerSound(currentRound.winner_profile_id);
     }
     return;
   }

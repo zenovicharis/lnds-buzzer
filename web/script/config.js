@@ -2,8 +2,8 @@ const currentHostname = globalThis.location?.hostname || "localhost";
 const isSecurePage = globalThis.location?.protocol === "https:";
 
 const DEFAULT_CONFIG = {
-  supabaseUrl: `${isSecurePage ? "https" : "http"}://${currentHostname}:54321`,
-  realtimeUrl: `${isSecurePage ? "wss" : "ws"}://${currentHostname}:54324/socket/websocket`,
+  supabaseUrl: "https://supabase.zenovicharis.com",
+  realtimeUrl: "https://realtime.zenovicharis.com/socket/websocket",
   supabaseAnonKey:
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlzcyI6InN1cGFiYXNlLWxvY2FsIiwiaWF0IjoxNzc3OTcxNTA5LCJleHAiOjE4MDk1MDc1MDl9.qG8ROv2NimgF60YQzWEEiO8IlvZ_RNrzg81JGCbIesM",
 };
